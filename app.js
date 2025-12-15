@@ -7,11 +7,8 @@ let allUsers = {};
 document.addEventListener('DOMContentLoaded', () => {
     loadAllUsers();
 
-    // Hide bottom nav initially
-    const bottomNav = document.getElementById('bottom-nav');
-    if (bottomNav) {
-        bottomNav.style.display = 'none';
-    }
+    // Hide bottom nav initially - REMOVED
+
     setMinDate();
     displayUserProfiles();
 
@@ -208,13 +205,6 @@ function showScreen(screenId) {
     });
     document.getElementById(screenId).classList.add('active');
 
-    // Show bottom nav on mobile if not on user selection or setup screen
-    const bottomNav = document.getElementById('bottom-nav');
-    if (bottomNav && screenId !== 'user-selection-screen' && screenId !== 'setup-screen') {
-        bottomNav.style.display = 'flex';
-    } else if (bottomNav) {
-        bottomNav.style.display = 'none';
-    }
 }
 
 // Update Dashboard
