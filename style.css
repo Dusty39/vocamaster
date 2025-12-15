@@ -411,6 +411,8 @@ body {
     /* Removed large margins that might cause scroll */
 }
 
+
+
 /* Statistics Screen Styles */
 .stats-container {
     max-width: 1200px;
@@ -1267,4 +1269,170 @@ body {
 .btn-secondary:hover {
     background: var(--primary);
     color: white;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+
+    /* Container & Layout */
+    .user-selection-container,
+    .setup-container,
+    .stats-container {
+        padding: 1rem;
+        width: 100%;
+    }
+
+    /* Dashboard Header */
+    .main-header {
+        padding: 0.8rem 1rem;
+    }
+
+    .brand-text-header {
+        font-size: 1.4rem;
+        display: none;
+        /* Hide text on mobile to save space, show only icon */
+    }
+
+    .header-icon-only {
+        height: 40px;
+    }
+
+    .header-stats-compact {
+        gap: 8px;
+    }
+
+    .stat-pill {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+
+    /* Module Grid - Compact 2 Column */
+    .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 15px;
+        margin-top: 15px;
+    }
+
+    .module-card {
+        padding: 15px;
+        aspect-ratio: auto;
+        /* Remove fixed square ratio */
+        min-height: 140px;
+        /* Ensure touch target size */
+        border-radius: 16px;
+    }
+
+    .module-icon {
+        font-size: 36px;
+        margin-bottom: 8px;
+    }
+
+    .module-card h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .module-info {
+        font-size: 12px;
+        /* Helper text size */
+    }
+
+    /* Typography Adjustments */
+    .setup-container h1,
+    .module-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .setup-container .subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Setup Form */
+    .setup-form {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    /* Modals */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+
+    /* Statistics Mobile */
+    .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stat-card-large {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .stat-icon {
+        font-size: 32px;
+    }
+
+    .stat-card-large .stat-value {
+        font-size: 24px;
+    }
+
+    .stat-card-large .stat-label {
+        font-size: 12px;
+    }
+
+    /* Vocabulary Options */
+    .vocab-options,
+    .reading-options,
+    .grammar-topics {
+        grid-template-columns: 1fr;
+        /* Stack vertically on mobile */
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .option-card,
+    .topic-card {
+        padding: 20px;
+        display: flex;
+        /* Horizontal layout for list items */
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+    }
+
+    .option-card h3,
+    .topic-card h3 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .option-card p,
+    .topic-card p {
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 380px) {
+    .modules-grid {
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .module-card {
+        padding: 12px;
+        min-height: 120px;
+    }
+
+    .brand-text-header {
+        display: none;
+    }
 }
