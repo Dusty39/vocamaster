@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards - YDS Vocabulary</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="vocab-style.css">
+</head>
+
+<body>
+    <div class="vocab-container">
+        <div class="vocab-header">
+            <button class="btn-back" onclick="goBack()">← Back</button>
+            <h1>🎴 Flashcards</h1>
+            <button class="btn-help" onclick="showHelp()">❓</button>
+            <div class="progress-info">
+                <span id="card-counter">0 / 0</span>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeHelp()">&times;</span>
+                <h2>Flashcard Sistemi Nasıl Çalışır?</h2>
+                <p><strong>Spaced Repetition (Aralıklı Tekrar)</strong> yöntemi kullanılır:</p>
+                <ul>
+                    <li><strong>😰 Zor:</strong> Kelimeyi 1 gün sonra tekrar gösterir</li>
+                    <li><strong>😊 İyi:</strong> Kelimeyi 3 gün sonra tekrar gösterir</li>
+                    <li><strong>😎 Kolay:</strong> Kelimeyi 5-7 gün sonra tekrar gösterir</li>
+                </ul>
+                <p>Bir kelimeyi 3+ defa "Kolay" olarak işaretlerseniz, "Öğrenildi" durumuna geçer ve daha az sıklıkla
+                    karşınıza çıkar.</p>
+                <p><em>İpucu: Dürüst olun! Kelimeyi gerçekten biliyorsanız "Kolay", hatırlamakta zorlandıysanız
+                        "Zor" seçin.</em></p>
+            </div>
+        </div>
+
+        <div class="flashcard-container">
+            <div class="level-selector">
+                <button class="level-btn active" onclick="selectLevel(1)">Seviye 1 (Kolay)</button>
+                <button class="level-btn" onclick="selectLevel(2)">Seviye 2 (Orta)</button>
+                <button class="level-btn" onclick="selectLevel(3)">Seviye 3 (Zor)</button>
+            </div>
+
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-inner" id="card-inner">
+                    <div class="card-front">
+                        <div class="word-display" id="word-display">abandon</div>
+                        <p class="hint">Kartı çevirmek için tıklayın</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="meaning-display" id="meaning-display">terk etmek, bırakmak</div>
+                        <div class="example-display" id="example-display">
+                            They had to abandon the project due to lack of funding.
+                        </div>
+                        <div class="category-tag" id="category-tag">general</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-actions">
+                <button class="action-btn btn-hard" onclick="rateCard('hard')">
+                    😰 Zor
+                </button>
+                <button class="action-btn btn-good" onclick="rateCard('good')">
+                    😊 İyi
+                </button>
+                <button class="action-btn btn-easy" onclick="rateCard('easy')">
+                    😎 Kolay
+                </button>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-value" id="new-count">0</span>
+                    <span class="stat-label">Yeni</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="learning-count">0</span>
+                    <span class="stat-label">Öğreniliyor</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="mastered-count">0</span>
+                    <span class="stat-label">Öğrenildi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="words-database.js"></script>
+    <script src="words-additional.js"></script>
+    <script src="flashcards.js"></script>
+</body>
+
+</html>

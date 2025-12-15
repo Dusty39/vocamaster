@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar - VocaMaster</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="grammar-style.css">
+</head>
+
+<body>
+    <div class="grammar-container">
+        <div class="header">
+            <button class="btn-back" onclick="goBack()">← Dashboard</button>
+            <h1>📖 Grammar</h1>
+        </div>
+
+        <div class="grammar-content">
+            <div class="topics-grid" id="topics-grid">
+                <!-- Topics will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Topic Detail Modal -->
+        <div id="topic-modal" class="modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h2 id="topic-title">Topic</h2>
+                    <button class="btn-close" onclick="closeModal()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div id="topic-content">
+                        <!-- Content will be loaded here -->
+                    </div>
+
+                    <div class="practice-section">
+                        <h3>Practice Exercises</h3>
+                        <div id="exercises-container">
+                            <!-- Exercises will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="grammar-data.js"></script>
+    <script src="grammar.js"></script>
+    <script>
+        function toggleIrregularVerbs() {
+            const list = document.getElementById('irregular-verbs-list');
+            if (list.style.display === 'none') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

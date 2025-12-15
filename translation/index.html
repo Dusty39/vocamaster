@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Practice - YDS Study</title>
+    <link rel="stylesheet" href="translation-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Selection Screen -->
+        <div id="selection-screen" class="screen active">
+            <div class="header">
+                <button class="btn-back" onclick="goBack()">← Back</button>
+                <h1>🌐 Translation Practice</h1>
+            </div>
+            <div class="content">
+                <div class="type-selection">
+                    <div class="type-card" onclick="selectType('turkishToEnglish')">
+                        <h3>🇹🇷 → 🇬🇧</h3>
+                        <p>Turkish to English</p>
+                        <span class="exercise-count">15 exercises</span>
+                    </div>
+                    <div class="type-card" onclick="selectType('englishToTurkish')">
+                        <h3>🇬🇧 → 🇹🇷</h3>
+                        <p>English to Turkish</p>
+                        <span class="exercise-count">15 exercises</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-screen" class="screen">
+            <div class="header">
+                <button class="btn-back" onclick="backToTypeSelection()">← Back</button>
+                <h2 id="translation-type-title">Select Difficulty</h2>
+            </div>
+            <div class="content">
+                <div class="level-selection">
+                    <div class="level-card" onclick="startPractice('easy')">
+                        <h3>🟢 Easy</h3>
+                        <p>Basic sentences and everyday vocabulary</p>
+                    </div>
+                    <div class="level-card" onclick="startPractice('medium')">
+                        <h3>🟡 Medium</h3>
+                        <p>Complex sentences and intermediate grammar</p>
+                    </div>
+                    <div class="level-card" onclick="startPractice('hard')">
+                        <h3>🔴 Hard</h3>
+                        <p>Advanced vocabulary and academic language</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Screen -->
+        <div id="practice-screen" class="screen">
+            <div class="header">
+                <button class="btn-back" onclick="backToLevelSelection()">← Back</button>
+                <div class="practice-header">
+                    <h2>Translation Practice</h2>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="exercise-progress">Exercise 1 of 5</span>
+                </div>
+            </div>
+            <div class="content practice-content">
+                <div class="exercise-container">
+                    <div class="source-text">
+                        <label>Translate this:</label>
+                        <p id="source-text"></p>
+                    </div>
+                    <div class="translation-input">
+                        <label for="translation-answer">Your translation:</label>
+                        <textarea id="translation-answer" placeholder="Type your translation here..."
+                            rows="4"></textarea>
+                    </div>
+                    <div id="feedback" class="feedback"></div>
+                    <div class="action-buttons">
+                        <button id="check-btn" class="btn-primary" onclick="checkTranslation()">Check Answer</button>
+                        <button id="next-btn" class="btn-secondary" onclick="nextExercise()" style="display: none;">Next
+                            Exercise →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="header">
+                <h2>📊 Results</h2>
+            </div>
+            <div class="content results-content">
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="score-text">0/0</span>
+                    </div>
+                    <p id="completion-message"></p>
+                </div>
+                <div id="summary" class="summary"></div>
+                <div class="result-actions">
+                    <button class="btn-primary" onclick="resetPractice()">Practice Again</button>
+                    <button class="btn-secondary" onclick="goBack()">Back to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="translation-data.js"></script>
+    <script src="translation.js"></script>
+</body>
+
+</html>

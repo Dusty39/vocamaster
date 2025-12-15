@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocaMaster - YDS Preparation Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- User Selection Screen -->
+    <div id="user-selection-screen" class="screen active">
+        <div class="user-selection-container">
+            <div class="app-logo">
+                <div class="brand-lockup-login">
+                    <img src="/Users/serhataykis/.gemini/antigravity/brain/02d9b995-4dce-4b41-857d-1f1574193fb3/vocamaster_v_icon_red_only_1765229966492.png"
+                        alt="V Logo" class="login-icon-only">
+                </div>
+            </div>
+
+            <!-- Text removed for minimal design -->
+            <div class="user-profiles">
+                <h2 class="brand-subtitle-login">VocaMaster</h2>
+                <div class="profiles-grid" id="profiles-grid">
+                    <!-- Profiles will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setup Screen -->
+    <div id="setup-screen" class="screen">
+        <div class="setup-container">
+            <h1>🎯 Welcome to VocaMaster</h1>
+            <p class="subtitle">Let's set up your study plan</p>
+
+            <div class="setup-form">
+                <div class="form-group">
+                    <label>👤 Your Name</label>
+                    <input type="text" id="user-name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>📅 Exam Date</label>
+                    <input type="date" id="exam-date" required>
+                    <p class="help-text">Select your target YDS exam date</p>
+                </div>
+
+                <div class="form-group">
+                    <label>📊 Current Level</label>
+                    <select id="current-level">
+                        <option value="beginner">Beginner (A1-A2)</option>
+                        <option value="intermediate" selected>Intermediate (B1-B2)</option>
+                        <option value="advanced">Advanced (C1-C2)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>⏰ Daily Study Time</label>
+                    <select id="daily-time">
+                        <option value="30">30 minutes</option>
+                        <option value="60" selected>1 hour</option>
+                        <option value="90">1.5 hours</option>
+                        <option value="120">2 hours</option>
+                        <option value="180">3 hours</option>
+                    </select>
+                </div>
+
+
+
+                <button class="btn-primary" onclick="completeSetup()">
+                    Start Learning 🚀
+                </button>
+                <button class="btn-secondary" onclick="cancelSetup()" style="margin-top: 10px;">
+                    ← Back to Profiles
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard-screen" class="screen">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="brand">
+                        <div class="brand-lockup-header">
+                            <img src="/Users/serhataykis/.gemini/antigravity/brain/02d9b995-4dce-4b41-857d-1f1574193fb3/vocamaster_v_icon_red_only_1765229966492.png"
+                                alt="V Logo" class="header-icon-only">
+                            <span class="brand-text-header">VocaMaster</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-stats-compact">
+                        <div class="stat-pill" title="Days Until Exam">
+                            <span class="pill-icon">⏳</span>
+                            <span class="pill-value" id="days-remaining">--</span>
+                        </div>
+                        <div class="stat-pill" title="Study Streak">
+                            <span class="pill-icon">🔥</span>
+                            <span class="pill-value" id="study-streak">0</span>
+                        </div>
+                    </div>
+
+                    <div class="header-actions">
+                        <button class="icon-btn" onclick="openModule('statistics')" title="Statistics">
+                            📊
+                        </button>
+                        <button class="icon-btn" onclick="showSettings()" title="Settings">
+                            ⚙️
+                        </button>
+                        <div class="profile-menu" onclick="switchUser()" title="Switch User">
+                            <span class="user-avatar-small">👤</span>
+                            <span class="user-names-small" id="current-user-name">User</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <section class="modules-section">
+                <!-- <h2>📚 Study Modules</h2> -->
+                <div class="modules-grid compact-grid">
+                    <div class="module-card primary-card" onclick="openModule('vocabulary')">
+                        <div class="card-content">
+                            <div class="module-icon">📝</div>
+                            <div class="module-info">
+                                <h3>Vocabulary</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card primary-card" onclick="openModule('grammar')">
+                        <div class="card-content">
+                            <div class="module-icon">📖</div>
+                            <div class="module-info">
+                                <h3>Grammar</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card secondary-card" onclick="openModule('reading')">
+                        <div class="card-content">
+                            <div class="module-icon">📰</div>
+                            <div class="module-info">
+                                <h3>Reading</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-card secondary-card" onclick="openModule('practice-test')">
+                        <div class="card-content">
+                            <div class="module-icon">📝</div>
+                            <div class="module-info">
+                                <h3>Practice</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚙️ Settings</h2>
+                <button class="btn-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Profile Settings</h3>
+                    <label>Profile Name</label>
+                    <input type="text" id="settings-profile-name" placeholder="Enter your name" required>
+                    <button class="btn-danger" onclick="resetProgress()" style="margin-top: 20px;">
+                        🔄 Reset All Progress
+                    </button>
+                    <p class="warning-text">⚠️ Warning: This will delete all your study data!</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Study Settings</h3>
+                    <label>Daily Study Goal</label>
+                    <select id="settings-daily-time">
+                        <option value="30">30 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="90">1.5 hours</option>
+                        <option value="120">2 hours</option>
+                        <option value="180">3 hours</option>
+                    </select>
+
+
+
+                    <button class="btn-primary" onclick="saveSettings()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vocabulary Module -->
+    <div id="vocabulary-screen" class="screen module-screen">
+        <div class="module-header">
+            <button class="btn-back" onclick="backToDashboard()">← Dashboard</button>
+            <h1>📝 Vocabulary</h1>
+        </div>
+        <div class="module-content">
+            <div class="vocab-options">
+                <div class="option-card" onclick="startFlashcards()">
+                    <h3>🎴 Flashcards</h3>
+                    <p>Learn with spaced repetition</p>
+                </div>
+                <div class="option-card" onclick="startVocabQuiz()">
+                    <h3>❓ Quiz</h3>
+                    <p>Test your vocabulary knowledge</p>
+                </div>
+                <div class="option-card" onclick="viewWordLists()">
+                    <h3>📋 Word Lists</h3>
+                    <p>Browse by category</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grammar Module -->
+    <div id="grammar-screen" class="screen module-screen">
+        <div class="module-header">
+            <button class="btn-back" onclick="backToDashboard()">← Back</button>
+            <h1>📖 Grammar</h1>
+        </div>
+        <div class="module-content">
+            <div class="grammar-topics">
+                <div class="topic-card">
+                    <h3>Tenses</h3>
+                    <p>12 verb tenses</p>
+                    <button class="btn-topic">Study</button>
+                </div>
+                <div class="topic-card">
+                    <h3>Modals</h3>
+                    <p>Modal verbs</p>
+                    <button class="btn-topic">Study</button>
+                </div>
+                <div class="topic-card">
+                    <h3>Conditionals</h3>
+                    <p>If clauses</p>
+                    <button class="btn-topic">Study</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Screen -->
+    <div class="screen" id="statistics-screen">
+        <div class="module-header">
+            <button class="btn-back" onclick="backToDashboard()">← Back</button>
+            <h2>📊 Statistics & Progress</h2>
+        </div>
+
+        <div class="stats-container">
+            <!-- Overview Cards -->
+            <div class="stats-overview">
+                <div class="stat-card-large">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="stats-total-words">0</span>
+                        <span class="stat-label">Words Learned</span>
+                    </div>
+                </div>
+
+                <div class="stat-card-large">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="stats-streak">0</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+
+                <div class="stat-card-large">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="stats-total-time">0h</span>
+                        <span class="stat-label">Total Study Time</span>
+                    </div>
+                </div>
+
+                <div class="stat-card-large">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="stats-accuracy">0%</span>
+                        <span class="stat-label">Quiz Accuracy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Goals -->
+            <div class="stats-section">
+                <h3>🎯 Today's Goals</h3>
+                <div class="goals-list">
+                    <div class="goal-item-detailed">
+                        <div class="goal-header">
+                            <span class="goal-title">Daily Study Time</span>
+                            <span class="goal-value" id="goal-time-text">0 / 60 min</span>
+                        </div>
+                        <div class="goal-progress-bar">
+                            <div class="goal-progress-fill" id="goal-time-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="goal-item-detailed">
+                        <div class="goal-header">
+                            <span class="goal-title">New Words</span>
+                            <span class="goal-value" id="goal-words-text">0 / 20 words</span>
+                        </div>
+                        <div class="goal-progress-bar">
+                            <div class="goal-progress-fill" id="goal-words-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="goal-item-detailed">
+                        <div class="goal-header">
+                            <span class="goal-title">Quiz Score</span>
+                            <span class="goal-value" id="goal-quiz-text">0 / 10 quizzes</span>
+                        </div>
+                        <div class="goal-progress-bar">
+                            <div class="goal-progress-fill" id="goal-quiz-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Progress -->
+            <div class="stats-section">
+                <h3>📈 Module Progress</h3>
+                <div class="module-stats">
+                    <div class="module-stat-item">
+                        <div class="module-stat-header">
+                            <span class="module-stat-icon">📚</span>
+                            <span class="module-stat-name">Vocabulary</span>
+                        </div>
+                        <div class="module-stat-details">
+                            <div class="stat-detail">
+                                <span class="detail-label">Words Mastered</span>
+                                <span class="detail-value" id="vocab-mastered">0</span>
+                            </div>
+                            <div class="stat-detail">
+                                <span class="detail-label">Quiz Average</span>
+                                <span class="detail-value" id="vocab-average">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-stat-item">
+                        <div class="module-stat-header">
+                            <span class="module-stat-icon">📖</span>
+                            <span class="module-stat-name">Grammar</span>
+                        </div>
+                        <div class="module-stat-details">
+                            <div class="stat-detail">
+                                <span class="detail-label">Topics Completed</span>
+                                <span class="detail-value" id="grammar-completed">0 / 13</span>
+                            </div>
+                            <div class="stat-detail">
+                                <span class="detail-label">Accuracy</span>
+                                <span class="detail-value" id="grammar-accuracy">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Activity -->
+            <div class="stats-section">
+                <h3>📅 Weekly Activity</h3>
+                <div class="activity-chart">
+                    <div class="activity-day" data-day="Mon">
+                        <div class="activity-bar" id="activity-mon"></div>
+                        <span class="day-label">Mon</span>
+                    </div>
+                    <div class="activity-day" data-day="Tue">
+                        <div class="activity-bar" id="activity-tue"></div>
+                        <span class="day-label">Tue</span>
+                    </div>
+                    <div class="activity-day" data-day="Wed">
+                        <div class="activity-bar" id="activity-wed"></div>
+                        <span class="day-label">Wed</span>
+                    </div>
+                    <div class="activity-day" data-day="Thu">
+                        <div class="activity-bar" id="activity-thu"></div>
+                        <span class="day-label">Thu</span>
+                    </div>
+                    <div class="activity-day" data-day="Fri">
+                        <div class="activity-bar" id="activity-fri"></div>
+                        <span class="day-label">Fri</span>
+                    </div>
+                    <div class="activity-day" data-day="Sat">
+                        <div class="activity-bar" id="activity-sat"></div>
+                        <span class="day-label">Sat</span>
+                    </div>
+                    <div class="activity-day" data-day="Sun">
+                        <div class="activity-bar" id="activity-sun"></div>
+                        <span class="day-label">Sun</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Countdown -->
+            <div class="stats-section">
+                <h3>🎓 Exam Countdown</h3>
+                <div class="countdown-card">
+                    <div class="countdown-value" id="days-remaining">--</div>
+                    <div class="countdown-label">Days Until Exam</div>
+                    <div class="countdown-date" id="exam-date-display">Not set</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Screen Removed (Merged with User Selection) -->
+
+    <!-- Reading Module -->
+    <div id="reading-screen" class="screen module-screen">
+        <div class="module-header">
+            <button class="btn-back" onclick="backToDashboard()">← Back</button>
+            <h1>📰 Reading</h1>
+        </div>
+        <div class="module-content">
+            <div class="reading-options">
+                <div class="option-card">
+                    <h3>📚 Text Library</h3>
+                    <p>Texts by difficulty level</p>
+                </div>
+                <div class="option-card">
+                    <h3>⏱️ Timed Reading</h3>
+                    <p>Practice with timer</p>
+                </div>
+                <div class="option-card">
+                    <h3>❓ Comprehension</h3>
+                    <p>Understanding questions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

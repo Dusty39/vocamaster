@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension - YDS Study</title>
+    <link rel="stylesheet" href="reading-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Selection Screen -->
+        <div id="selection-screen" class="screen active">
+            <div class="header">
+                <button class="btn-back" onclick="goBack()">← Dashboard</button>
+                <h1>📰 Reading</h1>
+            </div>
+            <div class="content">
+                <div class="text-list" id="text-list">
+                    <!-- Texts will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Reading Screen -->
+        <div id="reading-screen" class="screen">
+            <div class="header">
+                <button class="btn-back" onclick="backToSelection()">← Back</button>
+                <h2 id="reading-title">Reading Text</h2>
+                <div class="reading-info">
+                    <span id="word-count"></span>
+                    <span id="timer" class="timer">⏱️ <span id="time-display">0:00</span></span>
+                </div>
+            </div>
+            <div class="content reading-content">
+                <div class="text-container">
+                    <div id="reading-text" class="reading-text"></div>
+                    <button id="show-questions-btn" class="btn-primary" onclick="showQuestions()">Continue to Questions
+                        →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Screen -->
+        <div id="questions-screen" class="screen">
+            <div class="header">
+                <h2>Comprehension Questions</h2>
+                <div class="progress-indicator">
+                    <span id="question-progress">Question 1 of 4</span>
+                </div>
+            </div>
+            <div class="content questions-content">
+                <div id="question-container"></div>
+                <div class="question-nav">
+                    <button id="prev-btn" class="btn-secondary" onclick="previousQuestion()" disabled>←
+                        Previous</button>
+                    <button id="next-btn" class="btn-secondary" onclick="nextQuestion()">Next →</button>
+                    <button id="submit-btn" class="btn-primary" onclick="submitAnswers()" style="display: none;">Submit
+                        Answers</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="header">
+                <h2>📊 Results</h2>
+            </div>
+            <div class="content results-content">
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="score-percentage">0%</span>
+                    </div>
+                    <p id="score-text">You got <strong id="correct-count">0</strong> out of <strong
+                            id="total-count">0</strong> correct!</p>
+                </div>
+                <div id="answer-review" class="answer-review"></div>
+                <div class="result-actions">
+                    <button class="btn-primary" onclick="selectNewText()">Try Another Text</button>
+                    <button class="btn-secondary" onclick="goBack()">🏠 Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="reading-data.js"></script>
+    <script src="reading.js"></script>
+</body>
+
+</html>

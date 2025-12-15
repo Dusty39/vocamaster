@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Lists - VocaMaster</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="vocab-style.css">
+</head>
+
+<body>
+    <div class="vocab-container">
+        <div class="vocab-header">
+            <button class="btn-back" onclick="goBack()">← Back</button>
+            <h1>📋 Word Lists</h1>
+            <div class="progress-info">
+                <span id="word-count">Loading...</span>
+            </div>
+        </div>
+
+        <div class="wordlist-container">
+            <div class="filter-section">
+                <h3>Filter by Category</h3>
+                <div class="category-filters" id="category-filters">
+                    <button class="filter-btn active" data-category="all">All Words</button>
+                    <button class="filter-btn" data-category="academic">Academic</button>
+                    <button class="filter-btn" data-category="science">Science</button>
+                    <button class="filter-btn" data-category="social">Social</button>
+                    <button class="filter-btn" data-category="economics">Economics</button>
+                    <button class="filter-btn" data-category="general">General</button>
+                    <button class="filter-btn" data-category="technology">Technology</button>
+                </div>
+
+                <h3>Filter by Level</h3>
+                <div class="level-filters">
+                    <button class="filter-btn active" data-level="all">All Levels</button>
+                    <button class="filter-btn" data-level="1">Level 1 (Easy)</button>
+                    <button class="filter-btn" data-level="2">Level 2 (Medium)</button>
+                    <button class="filter-btn" data-level="3">Level 3 (Hard)</button>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search words..." onkeyup="searchWords()">
+                </div>
+            </div>
+
+            <div class="words-section">
+                <div class="words-header">
+                    <h3>Word List</h3>
+                    <span class="word-count-display" id="filtered-count">500 words</span>
+                </div>
+
+                <div class="words-grid" id="words-grid">
+                    <!-- Words will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="words-database.js?v=3"></script>
+    <script src="words-additional.js?v=3"></script>
+    <script src="wordlist.js?v=3"></script>
+</body>
+
+</html>

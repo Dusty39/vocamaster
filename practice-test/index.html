@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YDS Practice Test - Full Exam</title>
+    <link rel="stylesheet" href="practice-test-style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Main Selection Menu -->
+        <div id="selection-screen" class="screen active">
+            <div class="header">
+                <button class="btn-back" onclick="goBackToDashboard()">← Dashboard</button>
+                <h1>📝 Practice Center</h1>
+            </div>
+            <div class="content selection-content">
+                <div class="menu-grid">
+                    <div class="menu-card" onclick="openYDSExam()">
+                        <div class="menu-icon">🎓</div>
+                        <h2>Tam YDS Sınavı</h2>
+                        <p>Gerçek sınav formatında 80 soru, 180 dakika.</p>
+                        <span class="badge">Simülasyon</span>
+                    </div>
+
+                    <div class="menu-card" onclick="openVocabQuizMode()">
+                        <div class="menu-icon">🔤</div>
+                        <h2>Vocabulary Quiz</h2>
+                        <p>Kelime bilginizi hızlı testlerle sınayın.</p>
+                        <span class="badge">Pratik</span>
+                    </div>
+
+                    <div class="menu-card" onclick="openGrammarQuizMode()">
+                        <div class="menu-icon">✍️</div>
+                        <h2>Grammar Quiz</h2>
+                        <p>Dilbilgisi kurallarını pekiştirin.</p>
+                        <span class="badge">Pratik</span>
+                    </div>
+
+                    <div class="menu-card" onclick="openSentenceTest()">
+                        <div class="menu-icon">🔄</div>
+                        <h2>Advanced Sentence Test</h2>
+                        <p>Uzun ve karmaşık cümle çeviri analizleri.</p>
+                        <span class="badge">Pratik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YDS Welcome Screen -->
+        <div id="welcome-screen" class="screen">
+            <div class="header">
+                <button class="btn-back" onclick="showScreen('selection-screen')">← Geri</button>
+                <h1>🎓 YDS Deneme Sınavı</h1>
+            </div>
+            <div class="content welcome-content">
+                <div class="test-info">
+                    <h2>Güncel YDS Formatında Tam Test</h2>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <span class="info-number">80</span>
+                            <span class="info-label">Soru</span>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-number">180</span>
+                            <span class="info-label">Dakika</span>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-number">3</span>
+                            <span class="info-label">Bölüm</span>
+                        </div>
+                    </div>
+                    <div class="sections-info">
+                        <h3>Test Bölümleri:</h3>
+                        <ul>
+                            <li>📖 <strong>Reading Comprehension</strong> - 40 soru (Okuma parçaları ve anlama soruları)
+                            </li>
+                            <li>📚 <strong>Grammar</strong> - 25 soru (Dilbilgisi ve yapı soruları)</li>
+                            <li>💬 <strong>Vocabulary</strong> - 15 soru (Kelime bilgisi ve eşanlamlılar)</li>
+                        </ul>
+                    </div>
+                    <div class="instructions">
+                        <h3>⚠️ Önemli Notlar:</h3>
+                        <ul>
+                            <li>Test başladığında 180 dakikalık geri sayım başlayacak</li>
+                            <li>Soruları istediğiniz sırada cevaplayabilirsiniz</li>
+                            <li>Yanıtlarınızı değiştirebilirsiniz</li>
+                            <li>Test bitiminde detaylı sonuç raporu göreceksiniz</li>
+                        </ul>
+                    </div>
+                    <button class="btn-start" onclick="startTest('yds')">Teste Başla →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sentence Test Welcome Screen -->
+        <div id="sentence-welcome-screen" class="screen">
+            <div class="header">
+                <button class="btn-back" onclick="showScreen('selection-screen')">← Geri</button>
+                <h1>🔄 Advanced Sentence Test</h1>
+            </div>
+            <div class="content welcome-content">
+                <div class="test-info">
+                    <h2>Karmaşık Cümle Çeviri Testi</h2>
+                    <p>YDS seviyesinde uzun ve akademik cümlelerin çevirisi.</p>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <span class="info-number">20</span>
+                            <span class="info-label">Soru</span>
+                        </div>
+                        <div class="info-card">
+                            <span class="info-number">∞</span>
+                            <span class="info-label">Süre</span>
+                        </div>
+                    </div>
+                    <button class="btn-start" onclick="startTest('sentence')">Pratiğe Başla →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="test-screen" class="screen">
+            <div class="test-header">
+                <div class="header-left">
+                    <button class="btn-back-small" onclick="goBack()">❌ Çık</button>
+                    <h2 id="test-title">YDS Practice Test</h2>
+                    <span id="question-progress">Soru 1 / 80</span>
+                </div>
+                <div class="header-right">
+                    <div class="timer" id="timer">
+                        <span class="timer-icon">⏱️</span>
+                        <span id="time-remaining">00:00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-content">
+                <div class="sidebar">
+                    <h3>Sorular</h3>
+                    <div class="question-grid" id="question-grid">
+                        <!-- Question numbers will be generated here -->
+                    </div>
+                    <button class="btn-submit-test" onclick="submitTest()">Sınavı Bitir</button>
+                </div>
+
+                <div class="main-content">
+                    <div id="question-container">
+                        <!-- Questions will be displayed here -->
+                    </div>
+                    <div class="navigation-buttons">
+                        <button class="btn-nav" id="prev-btn" onclick="previousQuestion()" disabled>← Önceki</button>
+                        <button class="btn-nav" id="next-btn" onclick="nextQuestion()">Sonraki →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="result-header-bar">
+                <button class="btn-dashboard" onclick="goBackToDashboard()">🏠 Dashboard</button>
+                <h2>📊 Test Sonuçları</h2>
+            </div>
+            <div class="content results-content">
+                <div class="score-summary">
+                    <div class="total-score">
+                        <h3>Toplam Skor</h3>
+                        <div class="score-circle">
+                            <span id="total-score">0</span>
+                            <span class="score-max">/ 100</span>
+                        </div>
+                    </div>
+                    <div class="section-scores">
+                        <div class="section-score">
+                            <h4>Reading</h4>
+                            <p><span id="reading-score">0</span> / 40</p>
+                        </div>
+                        <div class="section-score">
+                            <h4>Grammar</h4>
+                            <p><span id="grammar-score">0</span> / 25</p>
+                        </div>
+                        <div class="section-score">
+                            <h4>Vocabulary</h4>
+                            <p><span id="vocabulary-score">0</span> / 15</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detailed-results" id="detailed-results">
+                    <!-- Detailed answer review will be shown here -->
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn-primary" onclick="retakeTest()">Testi Tekrarla</button>
+                    <button class="btn-secondary" onclick="goBack()">Ana Sayfaya Dön</button>
+                </div>
+            </div>
+        </div>
+        <!-- Confirmation Modal -->
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeConfirmModal()">×</span>
+                <div class="modal-icon">⚠️</div>
+                <h2>Sınavı Bitir?</h2>
+                <p>Sınavı sonlandırmak istediğinize emin misiniz?</p>
+                <p class="modal-subtext">Boş bıraktığınız sorular yanlış kabul edilecektir.</p>
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeConfirmModal()">Vazgeç</button>
+                    <button class="btn-confirm" onclick="finalizeTest()">Evet, Bitir</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="test-data.js"></script>
+    <script src="practice-test.js"></script>
+</body>
+
+</html>
