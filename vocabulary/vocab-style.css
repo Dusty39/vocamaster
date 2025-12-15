@@ -252,7 +252,114 @@
     }
 
     .card-actions {
+        flex-direction: row;
+        /* Keep buttons actionable side-by-side if possible, or stacked compactly */
+        gap: 10px;
+    }
+}
+
+/* 
+ * FLASHCARD SINGLE PAGE OPTIMIZATION (Mobile) 
+ * Ensures everything fits in one screen without scrolling 
+ */
+@media (max-width: 768px) {
+
+    /* Main container takes full height minus header */
+    .vocab-container {
+        height: 100vh;
+        display: flex;
         flex-direction: column;
+        overflow: hidden;
+        /* Prevent body scroll */
+    }
+
+    /* Header stays at top */
+    .vocab-header {
+        flex-shrink: 0;
+        padding: 10px 15px;
+    }
+
+    .vocab-header h1 {
+        font-size: 18px;
+    }
+
+    /* Flashcard Container becomes the main flex area */
+    .flashcard-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        /* Distribute vertical space */
+        padding: 10px 15px;
+        margin: 0;
+        max-width: 100%;
+    }
+
+    /* Level Selector Compact */
+    .level-selector {
+        margin-bottom: 15px;
+        gap: 10px;
+        flex-shrink: 0;
+    }
+
+    .level-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    /* Card takes available space but constrained */
+    .flashcard {
+        flex: 1;
+        /* Grow to fill available space */
+        max-height: 55vh;
+        /* Don't get too tall */
+        margin-bottom: 20px;
+        perspective: 1000px;
+    }
+
+    .card-inner {
+        height: 100%;
+        /* Fill the flashcard container */
+    }
+
+    .card-front,
+    .card-back {
+        padding: 20px;
+    }
+
+    .word-display {
+        font-size: 2.5rem;
+        /* Large but fits */
+        margin-bottom: 5px;
+    }
+
+    .meaning-display {
+        font-size: 1.8rem;
+    }
+
+    /* Actions fixed at bottom of container */
+    .card-actions {
+        flex-shrink: 0;
+        margin-bottom: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        /* 3 buttons side by side */
+        gap: 10px;
+        width: 100%;
+    }
+
+    .action-btn {
+        padding: 15px 0;
+        font-size: 14px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Hide Desktop Stats Panel on Mobile Flashcards to save space */
+    .stats-panel {
+        display: none;
     }
 }
 
@@ -580,21 +687,26 @@
         margin-bottom: 8px;
     }
 
+    /* Tidy Filter Layout (No Scroll) */
     .category-filters,
     .level-filters {
         flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 10px;
+        flex-wrap: wrap;
+        /* WRAP instead of scroll */
+        overflow-x: visible;
+        padding-bottom: 0;
         gap: 8px;
+        justify-content: center;
+        /* Center align items */
         margin-bottom: 15px;
-        -webkit-overflow-scrolling: touch;
     }
 
     .filter-btn {
-        white-space: nowrap;
         padding: 8px 12px;
         font-size: 13px;
-        flex-shrink: 0;
+        flex: 1 1 auto;
+        /* Grow to fill space */
+        text-align: center;
     }
 
     .words-section {
